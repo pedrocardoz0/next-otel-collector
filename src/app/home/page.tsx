@@ -1,3 +1,10 @@
+import Link from 'next/link'
+
 export default function Page() {
-    return <h1>Home</h1>
+    return (
+        <>
+            <Link href={'/home/dashboard#tjis'}>Dashboard Link</Link>
+            <h1>Home</h1>
+        </>
+    )
 }
