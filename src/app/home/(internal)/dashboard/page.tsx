@@ -1,11 +1,11 @@
 'use client'
 import Link from 'next/link'
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense } from 'react'
 
 export default function Page() {
 
     return (
-        <>
+        <div>
             <Link href={'/home'}>Home Link</Link>
             <h1>Dashboard</h1>
             <section>
@@ -28,6 +28,6 @@ export default function Page() {
                     <p id="tjis">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum blanditiis officia quis alias, voluptas necessitatibus sapiente vitae dolore, consectetur expedita nemo iusto mollitia vel modi reprehenderit dolores doloremque perspiciatis nostrum?</p>
                 </Suspense>
             </section>
-        </>
+        </div>
     )
 }

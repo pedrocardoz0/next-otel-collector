@@ -2,7 +2,7 @@
 
 import { trace } from "@opentelemetry/api";
 
-export default function Home() {
+export default function HomePage() {
   const handleTrace = () => {
     console.log("bomba")
     const span = trace.getTracer("front").startSpan("hello")
