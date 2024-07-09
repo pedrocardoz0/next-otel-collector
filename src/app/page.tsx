@@ -1,6 +1,7 @@
 'use client'
 
 import { trace } from "@opentelemetry/api";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function HomePage() {
@@ -36,6 +37,7 @@ export default function HomePage() {
     <>
       <h1>Jesus!</h1>
       <button onClick={handleTrace}>Click Trace</button>
+      <Link href={"/blog"}>Hey</Link>
       {console.log(data)}
       {console.log(pipoca)}
       {console.log(pipocaPOST)}
