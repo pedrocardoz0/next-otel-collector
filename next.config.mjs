@@ -11,7 +11,15 @@ const nextConfig = {
                 permanent: false
             }
         ]
-    }
+    },
+    images: {
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: '*.thecatapi.com',
+          },
+        ],
+      }
 };
 
 export default nextConfig;
