@@ -5,7 +5,8 @@ import { revalidateTag } from 'next/cache'
 export async function favourite(id: string) {
     try {
         const myHeaders = new Headers();
-        myHeaders.append("x-api-key", process.env.API_TOKEN);
+        const api_token = process.env.API_TOKEN ?? ""
+        myHeaders.append("x-api-key", api_token);
         myHeaders.append("Content-Type", "application/json");
     
         console.log("Making Request: ", id)
