@@ -1,8 +1,10 @@
 'use server'
 
 import { revalidateTag } from 'next/cache'
+import { trace } from '@opentelemetry/api';
 
 export async function favourite(id: string) {
+    const span = trace.getTracer('next-app').startSpan("hellow")
     try {
         const myHeaders = new Headers();
         const api_token = process.env.API_TOKEN ?? ""
@@ -33,7 +35,9 @@ export async function favourite(id: string) {
         revalidateTag('fav')
 
         console.log(await data.text())
+        span.end()
     } catch (err) {
+        span.end()
         throw new Error("Failed to favourite")
     }
 }
