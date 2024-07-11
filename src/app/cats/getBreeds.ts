@@ -57,7 +57,9 @@ type CatData = Image[];
 export async function getBreedsData(): Promise<CatData> {
     try {
         const headers = new Headers()
-        headers.append("x-api-key", process.env.API_TOKEN)
+        const api_token = process.env.API_TOKEN ?? ""
+
+        headers.append("x-api-key", api_token)
         const data = await fetch("https://api.thecatapi.com/v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=10", {
             headers
         })
