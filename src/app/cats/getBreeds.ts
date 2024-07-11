@@ -93,7 +93,9 @@ type FavouritesResponse = Favourite[];
 export async function getFavourites(): Promise<FavouritesResponse> {
     try {
         const headers = new Headers()
-        headers.append("x-api-key", process.env.API_TOKEN)
+        const api_token = process.env.API_TOKEN ?? ""
+
+        headers.append("x-api-key", api_token)
     
         const data = await fetch("https://api.thecatapi.com/v1/favourites?sub_id=pedro-custom-uuid&limit=100", {
             headers,
