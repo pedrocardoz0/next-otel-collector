@@ -1,8 +1,14 @@
 'use client'
 
 import { trace } from "@opentelemetry/api";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+
+import { Authenticator } from '@aws-amplify/ui-react'
+import '@aws-amplify/ui-react/styles.css'
+import outputs from "@/amplify_outputs.json";
+import { Amplify } from 'aws-amplify';
+
+Amplify.configure(outputs);
 
 export default function HomePage() {
   const handleTrace = () => {
@@ -12,7 +18,7 @@ export default function HomePage() {
     setTimeout(() => null, 1000)
     span.end()
   }
-  
+
   const [data, setData] = useState([]);
   const [pipoca, setPipoca] = useState([]);
   const [pipocaPOST, setPipocaPost] = useState([]);
@@ -22,25 +28,23 @@ export default function HomePage() {
       .then((response) => response.json())
       .then((data) => setData(data));
 
-      fetch("/api/pipoca")
+    fetch("/api/pipoca")
       .then((response) => response.json())
       .then((data) => setPipoca(data));
 
-      fetch("/api/pipoca", {
-        method: "POST"
-      }).then((response) => response.json())
+    fetch("/api/pipoca", {
+      method: "POST"
+    }).then((response) => response.json())
       .then((data) => setPipocaPost(data));
-
   }, [])
 
   return (
-    <>
-      <h1>Jesus!</h1>
-      <button onClick={handleTrace}>Click Trace</button>
-      <Link href={"/blog"}>Hey</Link>
-      {console.log(data)}
-      {console.log(pipoca)}
-      {console.log(pipocaPOST)}
-    </> 
+    <Authenticator>
+      {({ signOut }) => (
+        <main>
+          <button onClick={signOut}>Sign Out</button>
+        </main>
+      )}
+    </Authenticator>
   );
 }
