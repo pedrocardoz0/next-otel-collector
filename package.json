@@ -10,9 +10,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-amplify/adapter-nextjs": "^1.2.10",
     "@aws-amplify/ui-react": "^6.1.13",
     "@vercel/otel": "^1.9.1",
-    "aws-amplify": "^6.4.2",
+    "aws-amplify": "^6.4.3",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18"

@@ -7,8 +7,12 @@ import { Authenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
 import outputs from "../amplify_outputs.json";
 import { Amplify } from 'aws-amplify';
+import { fetchAuthSession } from "aws-amplify/auth";
 
-Amplify.configure(outputs);
+Amplify.configure(outputs, { ssr: true });
+fetchAuthSession().then((session) => {
+  console.log(session);
+});
 
 export default function HomePage() {
   const handleTrace = () => {
@@ -40,8 +44,9 @@ export default function HomePage() {
 
   return (
     <Authenticator>
-      {({ signOut }) => (
+      {({ signOut, user }) => (
         <main>
+          <h1>Hello {user?.signInDetails?.loginId}</h1>
           <button onClick={signOut}>Sign Out</button>
         </main>
       )}
