@@ -11,11 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: pull-request
-        run: |
-          echo $GITHUB_REF_NAME
-          gh_pr_up() { gh pr create $* || gh pr edit $* }
-          gh_pr_up --title "Merge ${GITHUB_REF_NAME} into dev" 
-            --body "Automated PR from ${GITHUB_REF_NAME} to dev" 
-            --head "${GITHUB_REF_NAME}" 
-            --base "dev"
+
+      - name: Pull-request branch to dev 
+        uses: repo-sync/pull-request@v2.12.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          destination_branch: "dev"
+          pr_title: "Pulling ${{ github.ref }} into dev" 
+          pr_body: |                                        
+            :crown: *An automated PR*
+            _Created by [repo-sync/pull-request](https://github.com/repo-sync/pull-request)_
