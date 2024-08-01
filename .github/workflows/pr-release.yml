@@ -12,12 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Pull-request branch to dev 
+      - name: Pull-request branch to main 
         uses: repo-sync/pull-request@v2.12.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           destination_branch: "main"
-          pr_title: "Pulling ${{ github.ref }} into dev" 
+          pr_title: "Pulling ${{ github.ref }} into main" 
           pr_body: |                                        
             :crown: *An automated PR*
             _Created by [repo-sync/pull-request](https://github.com/repo-sync/pull-request)_
