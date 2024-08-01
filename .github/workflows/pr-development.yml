@@ -3,17 +3,18 @@ on:
     branches:
     - feature/**
 
+permissions:
+  pull-requests: write
+
 jobs:
   pull-request:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - name: Pull-request branch to dev 
-        uses: repo-sync/pull-request@v2.12.1
-        with:
-          destination_branch: "dev"
-          pr_title: "Pulling ${{ github.ref }} into dev" 
-          pr_body: |                                        
-            :crown: *An automated PR*
-            _Created by [repo-sync/pull-request](https://github.com/repo-sync/pull-request)_
+      - name: pull-request
+        run: |
+          gh_pr_up() { gh pr create $* || gh pr edit $* }
+          gh_pr_up --title "Merge feature/${GITHUB_REF_NAME} into dev" \
+                   --body "Automated PR from feature/${GITHUB_REF_NAME} to dev" \
+                   --head "feature/${GITHUB_REF_NAME}" \
+                   --base "dev"
