@@ -1,0 +1,28 @@
+name: Create Release Branch
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  create-release-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get current version
+        run: |
+          VERSION=$(gh release view --json tagName --jq .tagName)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create release branch
+        run: |
+          RELEASE_BRANCH="release/${VERSION}"
+          git checkout -b $RELEASE_BRANCH dev
+          git push origin $RELEASE_BRANCH
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
