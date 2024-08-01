@@ -1,15 +1,15 @@
 name: Create Tag
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - dev
+  workflow_call:
     inputs:
       version:
         description: 'Semantic version (e.g. 1.0.0)'
         required: true
         type: string
-  push:
-    branches:
-      - dev
 
 jobs:
   create-tag:
