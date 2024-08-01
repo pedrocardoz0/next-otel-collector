@@ -14,7 +14,7 @@ jobs:
       - name: pull-request
         run: |
           gh_pr_up() { gh pr create $* || gh pr edit $* }
-          gh_pr_up --title "Merge feature/${GITHUB_REF_NAME} into dev" \
-                   --body "Automated PR from feature/${GITHUB_REF_NAME} to dev" \
-                   --head "feature/${GITHUB_REF_NAME}" \
-                   --base "dev"
+          gh_pr_up --title "Merge feature/${GITHUB_REF_NAME} into dev" 
+            --body "Automated PR from feature/${GITHUB_REF_NAME} to dev" 
+            --head "feature/${GITHUB_REF_NAME}" 
+            --base "dev"
