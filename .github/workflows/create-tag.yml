@@ -9,6 +9,7 @@ on:
       version:
         description: 'Semantic version (e.g. 1.0.0)'
         required: true
+        type: string
 
 jobs:
   create-tag:
@@ -19,11 +20,11 @@ jobs:
 
       - name: Create annotated tag
         run: |
-          gh release create "v${version}" --notes "Release notes for v${version}" --prerelease
+          gh release create "v${inputs.version}" --notes "Release notes for v${inputs.version}" --prerelease
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push tag
-        run: git push origin "v${version}"
+        run: git push origin "v${inputs.version}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
