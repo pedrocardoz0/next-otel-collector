@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - dev
-  workflow_call:
+  workflow_dispatch:
     inputs:
       version:
         description: 'Semantic version (e.g. 1.0.0)'
