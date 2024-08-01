@@ -1,5 +1,7 @@
 name: Create Tag
 
+permissions: write-all
+
 on:
   push:
     branches:
@@ -14,6 +16,7 @@ on:
 jobs:
   create-tag:
     runs-on: ubuntu-latest
+    if:  ${{ inputs.version }} 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
