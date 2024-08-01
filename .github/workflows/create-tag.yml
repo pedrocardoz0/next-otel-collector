@@ -1,7 +1,5 @@
 name: Create Tag
 
-permissions: write-all
-
 on:
   workflow_dispatch:
     inputs:
