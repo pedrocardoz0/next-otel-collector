@@ -19,14 +19,7 @@ jobs:
       - name: Create annotated tag
         run: |
           echo $VERSION
-          gh release create "v${VERSION}" --notes "Release notes for v${VERSION}" --prerelease
+          gh release create "v${VERSION}" --notes "Release notes for v${VERSION}" --latest 
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ inputs.version }}
-
-      - name: Push tag
-        run: git push origin "v${VERSION}"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ inputs.version }}
-
