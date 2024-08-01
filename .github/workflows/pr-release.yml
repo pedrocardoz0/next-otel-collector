@@ -1,24 +1,23 @@
-name: Create Release Branch
-
 on:
   push:
     branches:
-      - dev
+    - release/**
+
+permissions:
+  pull-requests: write
 
 jobs:
-  create-release-branch:
+  pull-request:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Get current version
-        run: |
-          VERSION=$(git describe --tags --abbrev=0)
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-
-      - name: Create release branch
-        run: |
-          RELEASE_BRANCH="release/v${VERSION}"
-          git checkout -b $RELEASE_BRANCH dev
-          git push origin $RELEASE_BRANCH
+      - name: Pull-request branch to main 
+        uses: repo-sync/pull-request@v2.12.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          destination_branch: "main"
+          pr_title: "Pulling ${{ github.ref }} into main" 
+          pr_body: |                                        
+            :crown: *An automated PR*
+            _Created by [repo-sync/pull-request](https://github.com/repo-sync/pull-request)_

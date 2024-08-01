@@ -3,6 +3,9 @@ on:
     branches:
     - feature/**
 
+permissions:
+  pull-requests: write
+
 jobs:
   pull-request:
     runs-on: ubuntu-latest
@@ -12,6 +15,7 @@ jobs:
       - name: Pull-request branch to dev 
         uses: repo-sync/pull-request@v2.12.1
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           destination_branch: "dev"
           pr_title: "Pulling ${{ github.ref }} into dev" 
           pr_body: |                                        

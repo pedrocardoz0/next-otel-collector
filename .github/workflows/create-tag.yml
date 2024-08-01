@@ -1,0 +1,28 @@
+name: Create Tag
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        description: 'Semantic version (e.g. 1.0.0)'
+        required: true
+        type: string
+        default: ''
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create annotated tag
+        run: |
+          gh release create "v${inputs.version}" --notes "Release notes for v${inputs.version}" --prerelease
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push tag
+        run: git push origin "v${inputs.version}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
