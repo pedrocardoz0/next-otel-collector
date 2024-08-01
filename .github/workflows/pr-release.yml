@@ -12,11 +12,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up gh
-        uses: actions/setup-gh@v3
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Get current version
         run: |
           VERSION=$(gh release view --json tagName --jq .tagName)
