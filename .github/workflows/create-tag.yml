@@ -1,0 +1,22 @@
+name: Create Tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Semantic version (e.g. 1.0.0)'
+        required: true
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create annotated tag
+        run: |
+          gh release create "v${version}" --notes "Release notes for v${version}" --prerelease
+
+      - name: Push tag
+        run: git push origin "v${version}"
