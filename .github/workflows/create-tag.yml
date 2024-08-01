@@ -18,11 +18,15 @@ jobs:
 
       - name: Create annotated tag
         run: |
-          gh release create "v${inputs.version}" --notes "Release notes for v${inputs.version}" --prerelease
+          echo $VERSION
+          gh release create "v${VERSION}" --notes "Release notes for v${VERSION}" --prerelease
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ inputs.version }}
 
       - name: Push tag
-        run: git push origin "v${inputs.version}"
+        run: git push origin "v${VERSION}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ inputs.version }}
+
