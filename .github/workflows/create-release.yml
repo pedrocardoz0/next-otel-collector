@@ -22,6 +22,8 @@ jobs:
       - name: Create release branch
         run: |
           RELEASE_BRANCH="release/${VERSION}"
+          git checkout dev
+          git pull
           git checkout -b $RELEASE_BRANCH
           git push origin $RELEASE_BRANCH
         env:
