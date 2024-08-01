@@ -3,15 +3,13 @@ name: Create Tag
 permissions: write-all
 
 on:
-  push:
-    branches:
-    - dev
   workflow_dispatch:
     inputs:
       version:
         description: 'Semantic version (e.g. 1.0.0)'
         required: true
         type: string
+        default: ''
 
 jobs:
   create-tag:
