@@ -1,9 +1,6 @@
 name: Create Release Branch
 
 on:
-  push:
-    branches:
-    - dev
   workflow_run:
     workflows: ["Create Tag"]
     types: ["completed"]
