@@ -15,7 +15,7 @@ jobs:
         run: |
           echo $GITHUB_REF_NAME
           gh_pr_up() { gh pr create $* || gh pr edit $* }
-          gh_pr_up --title "Merge feature/${GITHUB_REF_NAME} into dev" 
-            --body "Automated PR from feature/${GITHUB_REF_NAME} to dev" 
-            --head "feature/${GITHUB_REF_NAME}" 
+          gh_pr_up --title "Merge ${GITHUB_REF_NAME} into dev" 
+            --body "Automated PR from ${GITHUB_REF_NAME} to dev" 
+            --head "${GITHUB_REF_NAME}" 
             --base "dev"
