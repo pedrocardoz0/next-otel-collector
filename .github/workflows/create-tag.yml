@@ -1,7 +1,7 @@
 name: Create Tag
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       version:
         description: 'Semantic version (e.g. 1.0.0)'
