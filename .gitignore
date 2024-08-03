@@ -40,3 +40,6 @@ next-env.d.ts
 # amplify
 node_modules
 .amplify
+amplify_outputs.json
+aws-exports.js
+awsconfiguration.json
