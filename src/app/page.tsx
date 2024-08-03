@@ -7,12 +7,12 @@ import { Authenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
 import outputs from "../amplify_outputs.json";
 import { Amplify } from 'aws-amplify';
-import { fetchAuthSession } from "aws-amplify/auth";
+import type { Schema } from '../../amplify/data/resource'
+import { generateClient } from 'aws-amplify/data'
 
 Amplify.configure(outputs, { ssr: true });
-fetchAuthSession().then((session) => {
-  console.log(session);
-});
+
+const client = generateClient<Schema>()
 
 export default function HomePage() {
   const handleTrace = () => {
@@ -27,7 +27,14 @@ export default function HomePage() {
   const [pipoca, setPipoca] = useState([]);
   const [pipocaPOST, setPipocaPost] = useState([]);
 
+  const fetchArticle = async () => {
+    const data = await client.models.Article.list()
+    console.log("Articles Loaded From Dynamo: ", data)
+  }
+
   useEffect(() => {
+    fetchArticle()
+    
     fetch("/api")
       .then((response) => response.json())
       .then((data) => setData(data));
@@ -49,7 +56,7 @@ export default function HomePage() {
           <h1>Hello {user?.signInDetails?.loginId}</h1>
           <button onClick={signOut}>Sign Out</button>
         </main>
-      )}
+      )}      
     </Authenticator>
   );
 }
